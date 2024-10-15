@@ -1,0 +1,94 @@
+@use 'sass:map';
+
+$map: ();
+
+@function set($palette-name, $hue, $saturation: 50%, $contrastLimit: 5) {
+  $palette: ();
+  $contrast: ();
+
+  @for $i from 1 through 9 {
+    $lightness: #{$i * 100};
+    $color: hsl($hue, $saturation, 100% - $i * 10%);
+
+    $palette: map.set($palette, $lightness, $color);
+
+    $contrast: map.set(
+      $contrast,
+      #{$i * 100},
+      if($i < $contrastLimit, #000, #fff),
+    );
+  }
+
+  $palette: map.set($palette, "contrast", $contrast);
+  $map: map.set($map, "#{$palette-name}", $palette) !global;
+  @return $map;
+}
+
+@function get($key, $lightness: 500) {
+  @if map-has-key($map, $key) {
+    $palette: map-get($map, $key);
+
+    @if $key != 'contrast' {
+      @if map-has-key($palette, #{$lightness}) {
+        @return map-get($palette, #{$lightness});
+      }
+
+      @error 'ERROR: $lightness: "#{$lightness}" não existe dentro de "#{$key}".';
+    }
+
+    @error 'ERROR: Para buscar o contraste de uma cor, use a função "contrast($key, $lightness: 500)".';
+  }
+
+  @error 'ERRO: $palette: "#{$key}" não existe.';
+}
+
+@function contrast($key, $lightness: 500) {
+  @if map-has-key($map, $key) {
+    $palette: map-get(map-get($map, $key), 'contrast');
+
+    @if map-has-key($palette, #{$lightness}) {
+      @return map-get($palette, #{$lightness});
+    }
+
+    @error 'ERROR: $lightness: "#{$lightness}" não existe dentro de "#{$key}".';
+  }
+
+  @error 'ERRO: $palette: "#{$key}" não existe.';
+}
+
+@mixin init() {
+  $styles: (
+    'bg': background-color,
+    'color': color,
+    'border': border-color,
+  );
+
+  @each $style-name, $style in $styles {
+    @each $palette-name, $palette in $map {
+      @each $lightness, $color in $palette {
+        @if $lightness != 'contrast' {
+          .#{$style-name}-#{$palette-name}-#{$lightness} {
+            #{$style}: $color;
+
+            @if ($style-name == 'bg') {
+              color: contrast($palette-name, $lightness);
+            }
+
+            &-contrast {
+              #{$style}: contrast($palette-name, $lightness);
+
+              @if ($style-name == 'bg') {
+                color: $color;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+$saturation: 90%;
+$primary: set('primary', 250, $saturation);
+$accent: set('accent', 190, $saturation);
+$wrong: set('wrong', 345, $saturation);

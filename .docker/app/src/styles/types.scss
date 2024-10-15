@@ -1,0 +1,20 @@
+@use 'sass:list';
+
+$map: (
+  'display-1': (3rem, 200), // 48px
+  'display-2': (2rem, 200), // 32px
+  'title-1': (1.5rem, 600), // 24px
+  'title-2': (1.25rem, 600), // 20px
+  'default': (1rem, 400), // 16px
+  'button': (1rem, 600), // 16px
+  'hint': (.75rem, 400), // 12px
+);
+
+@mixin init() {
+  @each $font-config, $config in $map {
+    .#{$font-config} {
+      font-size: list.nth($config, 1);
+      font-weight: list.nth($config, 2);
+    }
+  }
+}
