@@ -1,0 +1,30 @@
+<label for="content-input" class="form-field-label hint color-{{ color }}"> {{ label }} </label>
+<div class="form-field-content {{ focus ? 'focus' : '' }} border-{{ color }}">
+  <input
+  (keyup)="onKeyUp($event)"
+  (focus)="focus = true"
+  (blur)="onBlur()"
+  [type]="type === 'password' ? (hidden ? 'password' : 'text') : type"
+  [placeholder]="placeholder"
+  class="content-input button color-{{ color }}">
+  @if (type === 'password') {
+    <i
+      tabindex="0"
+      role="button"
+      (click)="hidden = !hidden"
+      (keydown.enter)="hidden = !hidden"
+      (keydown.space)="hidden = !hidden"
+      aria-label="Alterna a visibilidade da senha"
+      class="content-visibility-ico mat-ico color-{{ color }}"
+    >
+      {{ hidden ? 'visibility_off' : 'visibility' }}
+    </i>
+  }
+  <i class="content-ico mat-ico color-{{ color }}"> {{ ico }} </i>
+</div>
+@if (error) {
+  <div class="hint">
+    <i class="mat-ico color-wrong-500"> info </i>
+    <p class="hint color-wrong-500"> {{ error }} </p>
+  </div>
+}

@@ -1,0 +1,25 @@
+<app-auth-form
+  (auth)="updateDto($event)"
+  [path]="path"
+  [formFieldList]="forms[path]"
+>
+  <h1 class="auth-form-title title-2 color-primary-900-contrast"> {{ config[path].title }} </h1>
+  <button
+    [disabled]="!dto"
+    (click)="onSubmit($event)"
+    class="auth-form-submit app-button"> {{ config[path].button }} </button>
+  <a
+    (click)="click.link1()"
+    (keydown.enter)="click.link1()"
+    (keydown.space)="click.link1()"
+    tabindex="0"
+    class="auth-form-link-1 app-link"
+    > {{ config[path].link1 }} </a>
+  <a
+    (click)="click.link2()"
+    (keydown.enter)="click.link2()"
+    (keydown.space)="click.link2()"
+    tabindex="0"
+    class="auth-form-link-1 app-link"
+  > {{ config[path].link2 }} </a>
+</app-auth-form>

@@ -1,0 +1,30 @@
+@use '../../../../styles/palette.scss' as palette;
+
+:host {
+  width: 360px;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+
+  box-sizing: border-box;
+  padding: 1.5rem;
+
+  background-color: palette.get('primary', 900);
+
+  form {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+
+    padding: 1rem 0;
+    border: solid palette.contrast('primary', 900);
+    border-width: 2px 0;
+  }
+}

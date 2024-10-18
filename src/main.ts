@@ -23,6 +23,12 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
+  app.enableCors({
+    origin: 'http://172.27.246.75:4200',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+  });
+
   app.use(morgan('dev'));
 
   await app.listen(process.env.PORT || 3000, process.env.HOST);

@@ -1,0 +1,12 @@
+@use '../styles/palette.scss' as palette;
+
+:host {
+  width: 100%;
+  min-height: 100vh;
+
+  display: flex;
+
+  background-image: url('../../public/background.svg');
+  background-size: cover;
+  background-position: center;
+}

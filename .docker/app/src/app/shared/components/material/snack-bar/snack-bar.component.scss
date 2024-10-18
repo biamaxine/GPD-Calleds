@@ -1,0 +1,31 @@
+@use '../../../../../styles/palette.scss' as palette;
+
+:host {
+  position: absolute;
+  right: 0;
+  top: 0;
+
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+
+  padding: .5rem 1rem;
+  border-radius: 1rem;
+
+  background-color: palette.get('primary', 900);
+
+  button {
+    border: none;
+    background-color: transparent;
+
+    padding: .5rem;
+
+    cursor: pointer;
+  }
+
+  &.negative {
+    * { color: palette.get('wrong', 500); }
+    color: palette.get('wrong', 500);
+  }
+}

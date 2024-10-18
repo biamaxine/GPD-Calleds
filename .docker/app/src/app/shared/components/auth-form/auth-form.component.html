@@ -1,0 +1,21 @@
+<ng-content select="h1.auth-form-title"/>
+
+<form action="login/register ">
+  @for (config of formFieldList; track config) {
+    <app-form-field
+      (value)="updateDto(config.label, $event)"
+
+      [label]="config.label"
+      [placeholder]="config.placeholder"
+      [ico]="config.ico"
+      [type]="config.type"
+      [verifier]="config?.verifier"
+      color="primary-900-contrast"
+    />
+  }
+
+  <ng-content select="button.auth-form-submit"/>
+</form>
+
+<ng-content select="a.auth-form-link-1"/>
+<ng-content select="a.auth-form-link-2"/>
