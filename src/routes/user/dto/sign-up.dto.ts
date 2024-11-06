@@ -26,6 +26,6 @@ export class SignUpDto {
   sector: string;
 
   @ApiProperty({ pattern: '92987654321' })
-  @IsPhoneNumber('BR')
+  @IsPhoneNumber('BR', { message: 'Número de telefone inválido.' })
   phone: string;
 }

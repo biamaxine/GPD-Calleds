@@ -30,4 +30,10 @@ export class UpdateCalledDto {
   @IsString()
   @MaxLength(500)
   description?: string;
+
+  @ApiProperty({ maxLength: 48 })
+  @IsOptional()
+  @IsString()
+  @MaxLength(48)
+  location: string;
 }

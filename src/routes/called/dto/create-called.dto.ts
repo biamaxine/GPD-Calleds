@@ -29,4 +29,10 @@ export class CreateCalledDto {
   @IsNotEmpty()
   @MaxLength(500)
   description: string;
+
+  @ApiProperty({ maxLength: 48 })
+  @IsString()
+  @IsNotEmpty()
+  @MaxLength(48)
+  location: string;
 }

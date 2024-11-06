@@ -45,9 +45,10 @@ export class CalledRepository {
     });
 
     return calleds.map(
-      ({ type, status, description, createdAt, updatedAt }) => ({
+      ({ type, status, location, description, createdAt, updatedAt }) => ({
         type,
         status,
+        location,
         description,
         createdAt,
         updatedAt,

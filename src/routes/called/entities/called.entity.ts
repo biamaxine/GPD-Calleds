@@ -5,6 +5,7 @@ export class CalledEntity implements Called {
   authorId: number;
 
   type: $Enums.CalledType;
+  location: string;
   description: string;
 
   status: $Enums.CalledStatus;

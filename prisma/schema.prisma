@@ -63,6 +63,7 @@ model Called {
 
   // Called Fields
   type CalledType
+  location String @db.VarChar(48)
   description String @db.VarChar(500)
   status CalledStatus @default(PENDING)
 
